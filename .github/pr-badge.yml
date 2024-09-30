@@ -1,0 +1,25 @@
+- message: "$author"
+  color: "green"
+  url: "https://github.com/$author"
+
+- imageUrl: https://github.com/$owner/$repo/actions/workflows/test-ci.yml/badge.svg?branch=$branchName
+  url: https://github.com/$owner/$repo/actions/workflows/test-ci.yml?query=branch:$branchName
+
+- label: "PR Size"
+  message: "Large"
+  color: "red"
+  when: "$additions >= 500"
+
+- label: "PR Size"
+  message: "Medium"
+  color: "yellow"
+  when: "$additions > 200 && $additions < 500"
+
+- label: "PR Size"
+  message: "Small"
+  color: "green"
+  when: "$additions <= 200"
+
+- message: "First time contributor"
+  color: "#000000"
+  when: "$payload.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'"

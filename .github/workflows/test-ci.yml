@@ -1,0 +1,59 @@
+name: Packages Tester
+
+on:
+  push:
+    branches-ignore: [master] #
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 1 * *
+
+defaults:
+  run:
+    shell: powershell
+
+env:
+  TEST_GROUPS: 1
+  au_MODULE_NAME: Chocolatey-AU
+
+concurrency:
+  group: au-tests
+  cancel-in-progress: false # just queue up
+
+jobs:
+  au-tests:
+    runs-on: windows-latest
+    steps:
+      - name: ⚙️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Get Short SHA
+        uses: hudsonm62/short-sha@v1
+        id: short-sha
+
+      - name: 🏗️ Install / Cache Choco AU
+        uses: potatoqualitee/psmodulecache@v6.2
+        with:
+          modules-to-cache: ${{ env.au_MODULE_NAME }}
+          shell: powershell, pwsh
+
+      - name: 🧪 Get Choco AU
+        run: |
+          Get-Module -Name ${{ env.au_MODULE_NAME }} -ListAvailable | Select Path
+          Get-Command Get-AUPackages
+
+      - name: 🧪 Run Test_All.ps1
+        id: test
+        continue-on-error: true
+        run: |
+          ./test_all.ps1 "random ${{ env.TEST_GROUPS }}"
+
+      - name: ⬆ Upload AU Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: AU-tests-result-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}
+          path: Update-Force-Test-*.md
+          compression-level: 9
+
+      - name: 🧪 Check Tests Outcome
+        if: steps.test.outcome != 'success'
+        run: Write-Error "Tests failed.."; exit 1

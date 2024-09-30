@@ -1,0 +1,91 @@
+name: Package Updater
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 * * *
+
+concurrency:
+  group: au
+  cancel-in-progress: true
+
+jobs:
+  updater:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell #pwsh
+
+    env:
+      au_MODULE_NAME: Chocolatey-AU
+
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+
+    steps:
+      - name: ⚙️ Build Info
+        run: |
+          Write-Output "PUSHED    : $('${{ github.event_name }}' -eq 'push')"
+          Write-Output "SCHEDULED : $('${{ github.event_name }}' -eq 'schedule')"
+          Write-Output "DISPATCH  : $('${{ github.event_name }}' -eq 'workflow_dispatch')"
+
+      - name: ⚙️ Get Short SHA
+        uses: hudsonm62/short-sha@v1
+        id: short-sha
+
+      - name: 🏗️ Install / Cache Choco AU
+        uses: potatoqualitee/psmodulecache@v6.2
+        with:
+          modules-to-cache: ${{ env.au_MODULE_NAME }}
+          shell: powershell, pwsh
+
+      - name: 🧪 Get Choco AU
+        run: |
+          Get-Module -Name ${{ env.au_MODULE_NAME }} -ListAvailable | Select Path
+          Get-Command Get-AUPackages
+
+      - name: 🌐 Login to Chocolatey Community Feed
+        run: |
+          choco apikey add -s "${{ vars.PKG_URI }}" -k "${{ secrets.PKG_APIKEY }}"
+
+      - name: ⚙️ Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: 📦 Update & Push All Packages
+        continue-on-error: true
+        id: push
+        run: |
+          $ErrorActionPreference = 'Continue'
+          ./update_all.ps1 -SourceUri "${{ vars.PKG_URI }}" -PackNPush
+
+      - name: ☄ Commit Updated
+        uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.push.outcome == 'success'
+        continue-on-error: true
+        with:
+          commit_message: "Choco-AU : Applied Automatic Package Updates"
+          file_pattern: "packages/**/*.nuspec packages/**/*.ps1"
+
+      - name: ⬆ Upload Update Info
+        uses: actions/upload-artifact@v4
+        with:
+          name: AU-update-result-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}
+          path: update_info.xml
+          compression-level: 9
+
+      - name: ⬆ Upload Updates Status
+        uses: actions/upload-artifact@v4
+        with:
+          name: AU-update-result-page-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}
+          path: Update-AUPackages.md
+          compression-level: 9
+
+      - name: 🧪 Check Updater Outcome
+        if: steps.push.outcome != 'success'
+        run: Write-Error "Errors occured during updates.."; exit 1

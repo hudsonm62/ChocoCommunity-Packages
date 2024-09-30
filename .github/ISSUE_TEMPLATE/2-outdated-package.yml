@@ -1,0 +1,53 @@
+name: Report Outdated Package
+description: Report a package thats outdated (or not updating).
+title: "[OUTDATED]: "
+labels: ["outdated", "packages", "au"]
+assignees:
+  - hudsonm62
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check to see if this already exists in [Issues](https://github.com/hudsonm62/ChocoCommunity-Packages/issues).
+
+  - type: input
+    id: latest-version
+    attributes:
+      label: Latest Version Number
+      description: The latest version on the vendor site.
+      placeholder: 1.2.3
+    validations:
+      required: true
+
+  - type: dropdown
+    id: release-type
+    attributes:
+      label: Release Type
+      description: The type of release this is. FYI typically only Full releases are considered.
+      multiple: false
+      options:
+        - Full/Normal Release
+        - Pre-Release
+        - Other/Unknown
+
+  - type: input
+    id: install-url
+    attributes:
+      label: Install URL
+      description: Updated URL to the install binary or setup (direct, or releases page)
+      placeholder: https://github.com/this/software/releases
+
+  - type: input
+    id: release-date
+    attributes:
+      label: Release Date
+      description: Date the software release became available.
+      placeholder: 1st January 2077
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Info
+      description: Any other information here that you feel may be relevant.
+    validations:
+      required: false
