@@ -23,7 +23,7 @@ if ($installDir -ne $toolsPath) {
 if (!(Get-PackageParameters)['SkipGuiShim']) {
     $oxreBin = Get-Item -Path $(Join-Path $installDir "openxr-explorer.exe") -Force
     Write-Host " Creating $($oxreBin.Name).gui dummy file for shim.."
-    New-Item "$($oxreBin.Name).gui" -ItemType File -Force | Out-Null
+    New-Item $installDir -Name "$($oxreBin.Name).gui" -ItemType File -Force | Out-Null
 }
 else {
     Write-Warning "Skipping .gui shim creation due to /SkipGuiShim - You typically don't need to specify this unless you're working closely with the openxr-explorer.exe CLI"
