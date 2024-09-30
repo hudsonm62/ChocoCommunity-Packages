@@ -5,8 +5,8 @@ $installDir = $toolsPath
 $packageArgs = @{
     packageName    = 'openxr-explorer'
     url64bit       = 'https://github.com/maluoi/openxr-explorer/releases/download/v1.4/openxr-explorer-win-x64.zip'
-    checksum64     = ''
-    checksumType64 = ''
+    checksum64     = '0f6ab1717089a0e4a276e377e5c5a4b14d2807884f6252ce046d7b0a7497b5a0'
+    checksumType64 = 'sha256'
     UnzipLocation  = $installDir
 }
 
