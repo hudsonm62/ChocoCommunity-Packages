@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>openxr-explorer</id>
-    <version>0.1</version>
+    <version>1.4</version>
     <iconUrl>https://cdn.jsdelivr.net/gh/hudsonm62/ChocoCommunity-Packages/icons/openxr-explorer.png</iconUrl>
     <packageSourceUrl>https://github.com/hudsonm62/ChocoCommunity-Packages</packageSourceUrl>
     <owners>hudsonm62</owners>
@@ -37,6 +37,10 @@ It can be handy to know what to expect when requesting data from OpenXR! This to
 Just about everything you see in the GUI is also available in text format when used from the command line! If you provide the openxr-explorer application with function or type names as arguments, it'll just dump the results as text to the console instead of launching the GUI. Who needs this? I don't know! I sure didn't, but I hope someone else does :)
 
 ## Package specific
+
+### [choco://openxr-explorer](choco://openxr-explorer)
+
+To use choco:// protocol URLs, install the [(unofficial) choco:// Protocol support](https://community.chocolatey.org/packages/choco-protocol-support)
 
 ### Package Parameters
 

@@ -6,7 +6,7 @@ $packageArgs = @{
     packageName    = 'openxr-explorer'
     url64bit       = 'https://github.com/maluoi/openxr-explorer/releases/download/v1.4/openxr-explorer-win-x64.zip'
     checksum64     = ''
-    checksumType64 = 'sha256'
+    checksumType64 = ''
     UnzipLocation  = $installDir
 }
 
