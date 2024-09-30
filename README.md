@@ -1,10 +1,10 @@
 # Chocolatey Community Packages
 
-[![Actions Updater](https://img.shields.io/github/actions/workflow/status/hudsonm62/ChocoCommunity-Packages/au-updater.yml?branch=master&logo=githubactions&style=for-the-badge&label=Updater)](https://github.com/hudsonm62/ChocoCommunity-Packages/actions/workflows/au-updater.yml) [![Report Broken Packages](https://img.shields.io/badge/broken%20packages-red?style=for-the-badge&logo=github&label=report&link=https%3A%2F%2Fgithub.com%2Fhudsonm62%2Fchoco-library%2Fissues%2Fnew%2Fchoose)](https://github.com/hudsonm62/ChocoCommunity-Packages/issues/new/choose)
+[![Actions AU](https://img.shields.io/github/actions/workflow/status/hudsonm62/ChocoCommunity-Packages/au_updater.yml?branch=master&logo=githubactions&style=for-the-badge&label=AU)](https://github.com/hudsonm62/ChocoCommunity-Packages/actions/workflows/au_updater.yml) [![Report Broken Packages](https://img.shields.io/badge/broken%20packages-red?style=for-the-badge&logo=github&label=report&link=https%3A%2F%2Fgithub.com%2Fhudsonm62%2Fchoco-library%2Fissues%2Fnew%2Fchoose)](https://github.com/hudsonm62/ChocoCommunity-Packages/issues/new/choose)
 
 ## Description
 
-This repository contains chocolatey packages created and maintained primarily by [hudsonm62](https://chocolatey.org/profiles/hudsonm62) for the [Chocolatey Community](https://community.chocolatey.org/packages), that are updated daily using [Chocolatey AU] via [GitHub Actions](https://github.com/hudsonm62/ChocoCommunity-Packages/actions/workflows/au-updater.yml).
+This repository contains chocolatey packages created and maintained primarily by [hudsonm62](https://chocolatey.org/profiles/hudsonm62) for the [Chocolatey Community](https://community.chocolatey.org/packages), that are updated daily using [Chocolatey AU] via [GitHub Actions](https://github.com/hudsonm62/ChocoCommunity-Packages/actions/workflows/au_updater.yml).
 
 ## File Key
 
