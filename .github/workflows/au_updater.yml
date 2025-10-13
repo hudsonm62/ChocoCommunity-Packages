@@ -65,7 +65,7 @@ jobs:
           ./update_all.ps1 -SourceUri "${{ vars.PKG_URI }}" -PackNPush
 
       - name: ☄ Commit Updated
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         if: steps.push.outcome == 'success'
         continue-on-error: true
         with:
