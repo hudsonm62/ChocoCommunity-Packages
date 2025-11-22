@@ -53,7 +53,7 @@ jobs:
           choco apikey add -s "${{ vars.PKG_URI }}" -k "${{ secrets.PKG_APIKEY }}"
 
       - name: ⚙️ Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: master
 
