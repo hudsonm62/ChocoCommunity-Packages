@@ -73,14 +73,14 @@ jobs:
           file_pattern: "packages/**/*.nuspec packages/**/*.ps1"
 
       - name: ⬆ Upload Update Info
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: AU-update-result-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}
           path: update_info.xml
           compression-level: 9
 
       - name: ⬆ Upload Updates Status
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: AU-update-result-page-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}
           path: Update-AUPackages.md
