@@ -48,7 +48,7 @@ jobs:
           ./test_all.ps1 "random ${{ env.TEST_GROUPS }}"
 
       - name: ⬆ Upload AU Test Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: AU-tests-result-${{ steps.short-sha.outputs.sha }}-${{ github.run_number }}
           path: Update-Force-Test-*.md
