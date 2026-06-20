@@ -38,7 +38,7 @@ jobs:
         id: short-sha
 
       - name: 🏗️ Install / Cache Choco AU
-        uses: potatoqualitee/psmodulecache@v6.2
+        uses: potatoqualitee/psmodulecache@v6.3
         with:
           modules-to-cache: ${{ env.au_MODULE_NAME }}
           shell: powershell, pwsh
